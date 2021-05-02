@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from "react";
 
 function SensorValue() {
-  const [sensorValue, setSensorValue]
+  const [sensorValue, setSensorValue] = useState(0);
 
   useEffect(() => {
     axios.get(process.env.REACT_APP_API + "/GetCurrentSensorValue?sensorid=moisturesensor1").then(response => {

@@ -7,7 +7,8 @@ module.exports = async function (context, req) {
   var entity = {
     PartitionKey: { '_': '1' },
     RowKey: uniqueID,
-    Value: JSON.stringify(context.req.body.uplink_message.frm_payload)
+    DeviceID: context.req.body.end_device_ids.device_id,
+    Value: context.req.body.uplink_message.frm_payload  //JSON.stringify(context.req.body.uplink_message.frm_payload)
   };
   tableSvc.insertEntity('SensorValues', entity, function (error, result, response) {
     if (!error) {

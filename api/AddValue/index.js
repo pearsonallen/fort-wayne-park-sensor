@@ -15,14 +15,41 @@ module.exports = async function (context, req) {
     DeviceID: context.req.body.end_device_ids.device_id,
     Value: t3   //JSON.stringify(context.req.body.uplink_message.frm_payload)
   };
+
   tableSvc.insertEntity('SensorValues', entity, function (error, result, response) {
     if (!error) {
       // Entity inserted
     }
   });
+
+  let query = new azure.TableQuery()
+    .where("RowKey == '" + context.req.body.end_device_ids.device_id + "'");
+    let r = await queryEntities(tableSvc, 'CurrentSensorValues', query, null);
+    let entity = r.entries[0];
+    entity.value._ = t3;
+
+    tableSvc.replaceEntity("CurrentSensorValues",entity,function(error,result,response) {
+      let t = response;
+    })
+
+
   context.res = {
     // status: 200, /* Defaults to 200 */
     
     body: "Inserted!"
   };
 }
+
+async function queryEntities(tableService, ...args) {
+    return new Promise((resolve, reject) => {
+        let promiseHandling = (err, result) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result);
+            }
+        };
+        args.push(promiseHandling);
+        tableService.queryEntities.apply(tableService, args);
+    });
+  };

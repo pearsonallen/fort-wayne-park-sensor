@@ -6,6 +6,9 @@
     "start": "func start",
     "test": "echo \"No tests yet...\""
   },
-  "dependencies": {},
+  "dependencies": {
+    "azure-storage": "^2.10.3",
+    "uuid": "^8.3.2"
+  },
   "devDependencies": {}
 }

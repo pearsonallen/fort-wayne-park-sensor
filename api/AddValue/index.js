@@ -21,12 +21,11 @@ module.exports = async function (context, req) {
       // Entity inserted
     }
   });
-
   let query = new azure.TableQuery()
     .where("RowKey == '" + context.req.body.end_device_ids.device_id + "'");
     let r = await queryEntities(tableSvc, 'CurrentSensorValues', query, null);
     let update_entity = r.entries[0];
-    update_entity.value._ = t3;
+    update_entity.Value._ = t3;
 
     tableSvc.replaceEntity("CurrentSensorValues",update_entity,function(error,result,response) {
       let t = response;

@@ -9,14 +9,14 @@ module.exports = async function (context, req) {
   var t2 = new Buffer(t,'base64').toString('hex');
   var t3 = parseInt(t2,16);
 
-  var entity = {
+  var insert_entity = {
     PartitionKey: { '_': '1' },
     RowKey: uniqueID,
     DeviceID: context.req.body.end_device_ids.device_id,
     Value: t3   //JSON.stringify(context.req.body.uplink_message.frm_payload)
   };
 
-  tableSvc.insertEntity('SensorValues', entity, function (error, result, response) {
+  tableSvc.insertEntity('SensorValues', insert_entity, function (error, result, response) {
     if (!error) {
       // Entity inserted
     }
@@ -25,10 +25,10 @@ module.exports = async function (context, req) {
   let query = new azure.TableQuery()
     .where("RowKey == '" + context.req.body.end_device_ids.device_id + "'");
     let r = await queryEntities(tableSvc, 'CurrentSensorValues', query, null);
-    let entity = r.entries[0];
-    entity.value._ = t3;
+    let update_entity = r.entries[0];
+    update_entity.value._ = t3;
 
-    tableSvc.replaceEntity("CurrentSensorValues",entity,function(error,result,response) {
+    tableSvc.replaceEntity("CurrentSensorValues",update_entity,function(error,result,response) {
       let t = response;
     })
 

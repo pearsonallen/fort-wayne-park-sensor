@@ -13,7 +13,7 @@ module.exports = async function (context, req) {
     PartitionKey: { '_': '1' },
     RowKey: uniqueID,
     DeviceID: context.req.body.end_device_ids.device_id,
-    Value: context.req.body.decoded_payload.payloadValue //JSON.stringify(context.req.body)
+    Value: context.req.body.uplink_message.decoded_payload.payloadValue //JSON.stringify(context.req.body)
   };
 
   tableSvc.insertEntity('SensorValues', insert_entity, function (error, result, response) {
@@ -25,7 +25,7 @@ module.exports = async function (context, req) {
     .where("RowKey == '" + context.req.body.end_device_ids.device_id + "'");
     let r = await queryEntities(tableSvc, 'CurrentSensorValues', query, null);
     let update_entity = r.entries[0];
-    update_entity.Value._ = context.req.body.decoded_payload.payloadValue;//t3;
+    update_entity.Value._ = context.req.body.uplink_message.decoded_payload.payloadValue;//t3;
 
     tableSvc.replaceEntity("CurrentSensorValues",update_entity,function(error,result,response) {
       let t = response;

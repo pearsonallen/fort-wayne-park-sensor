@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 function SensorValue() {
   const [sensorValue, setSensorValue] = useState(0);
 
+
+
   useEffect(() => {
     axios.get(process.env.REACT_APP_API + "/GetCurrentSensorValue?sensorid=moisturesensor1").then(response => {
       setSensorValue(response.data);
@@ -11,7 +13,7 @@ function SensorValue() {
   }, []);
 
   return <div className="sensorValue">
-    The ground moisture is at {sensorValue}%
+    The ground dryness is {sensorValue} (300 - 500 wet to dry)
   </div>
 }
 

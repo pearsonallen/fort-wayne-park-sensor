@@ -5,10 +5,6 @@ module.exports = async function (context, req) {
   var tableSvc = azure.createTableService('fwiotstorage', process.env["TableStorageAccessKey"]);
   var uniqueID = uuidv4();
 
-  // var t = context.req.body.uplink_message.frm_payload;
-  // var t2 = new Buffer(t,'base64').toString('hex');
-  // var t3 = parseInt(t2,16);
-
   var insert_entity = {
     PartitionKey: { '_': '1' },
     RowKey: uniqueID,
@@ -25,7 +21,7 @@ module.exports = async function (context, req) {
     .where("RowKey == '" + context.req.body.end_device_ids.device_id + "'");
     let r = await queryEntities(tableSvc, 'CurrentSensorValues', query, null);
     let update_entity = r.entries[0];
-    update_entity.Value._ = context.req.body.uplink_message.decoded_payload.payloadValue;//t3;
+    update_entity.Value._ = context.req.body.uplink_message.decoded_payload.payloadValue;
 
     tableSvc.replaceEntity("CurrentSensorValues",update_entity,function(error,result,response) {
       let t = response;
@@ -34,7 +30,6 @@ module.exports = async function (context, req) {
 
   context.res = {
     // status: 200, /* Defaults to 200 */
-    
     body: "Inserted!"
   };
 }

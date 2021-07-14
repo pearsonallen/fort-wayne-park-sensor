@@ -5,17 +5,24 @@ module.exports = async function (context, req) {
     var tableSvc = azure.createTableService('fwiotstorage',process.env["TableStorageAccessKey"]);
     
     var date = new Date();
-    var timeOffset = 1000 * 60 * 60 * 6;
-    date.setDate(date.getTime() - timeOffset);
+    date.setHours(date.getHours() - 23);
     var whereClause = ["Timestamp ge datetime'", date.toISOString(), "'"].join('');
     let query = new azure.TableQuery()
     .where(whereClause);
     let r = await queryEntities(tableSvc, 'SensorValues', query, null);
-    let entity = r.entries[0];
+
+    let returnObj = r.entries.map(function(item) {
+      return {
+        Timestamp: item.Timestamp._,
+        DeviceID: item.DeviceID._,
+        Value: item.Value._
+      };
+    });
+
     if (r.entries.length > 0) {
       context.res = {
         // status: 200, /* Defaults to 200 */
-        body: entity.Value._,
+        body: returnObj,
         headers: {
             'Content-Type': 'application/json'
         }

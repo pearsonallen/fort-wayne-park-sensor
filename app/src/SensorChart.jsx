@@ -1,9 +1,7 @@
-import axios from 'axios';
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Chart from 'chart.js/auto'
 
 function SensorChart() {
-  const [sensorValue, setSensorValue] = useState(0);
 
   const MONTHS = [
     'January',

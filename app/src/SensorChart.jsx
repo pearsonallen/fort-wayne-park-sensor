@@ -1,59 +1,91 @@
-// import React, { useEffect } from "react";
-// import Chart from 'chart.js/auto'
+import React, { useEffect, useState, useRef } from "react";
+import Chart from 'chart.js/auto'
+import axios from 'axios';
 
-function SensorChart() {
-
-  // const MONTHS = [
-  //   'January',
-  //   'February',
-  //   'March',
-  //   'April',
-  //   'May',
-  //   'June',
-  //   'July',
-  //   'August',
-  //   'September',
-  //   'October',
-  //   'November',
-  //   'December'
-  // ];
-  
-  // function months(config) {
-  //   var cfg = config || {};
-  //   var count = cfg.count || 12;
-  //   var section = cfg.section;
-  //   var values = [];
-  //   var i, value;
-  
-  //   for (i = 0; i < count; ++i) {
-  //     value = MONTHS[Math.ceil(i) % 12];
-  //     values.push(value.substring(0, section));
-  //   }
-  
-  //   return values;
-  // }
+// function SensorChart() {
+//   const chartContainer = useRef(null);
+//   const [chartInstance, setChartInstance] = useState(null);
 
 //   useEffect(() => {
-//     var ctx = document.getElementById('myChart').getContext('2d');
-//     const labels = months({count: 7});
-// var myChart = new Chart(ctx, {
-//     type: 'line',
-//     data: {
-//         labels: labels,
-//         datasets: [{
-//           label: 'My First Dataset',
-//           data: [65, 59, 80, 81, 56, 55, 40],
-//           fill: false,
-//           borderColor: 'rgb(75, 192, 192)',
-//           tension: 0.1
-//         }]
-//       }
-// });
-//   }, []);
+//     if(chartContainer && chartContainer.current) {
+//       const newChartInstance = new Chart(chartContainer.current, chartConfig);
+//       setChartInstance(newChartInstance);
+//       axios.get(process.env.REACT_APP_API + "/GetHistoricalSensorValues").then(response => {
+//         updateChart(response.data);
+//       });
+//     }
+    
+//   }, [chartContainer]);
 
-  return <div className="container">
-    <canvas id="myChart" width="400" height="400"></canvas>
-  </div>
+//   function updateChart(data)
+//   {
+//     var ctx = document.getElementById('myChart').getContext('2d');
+
+//     var d = data.map(function(item) {return item.Value;});
+
+//     var myChart = new Chart(ctx, {
+//       type: 'line',
+//       data: {
+//           labels: null,
+//           datasets: [{
+//             label: 'My First Dataset',
+//             data: d,
+//             fill: false,
+//             borderColor: 'rgb(75, 192, 192)',
+//             tension: 0.1
+//           }]
+//         }
+//   });
+
+//   return ( <div className="container">
+//     <canvas ref={chartContainer} width="400" height="400" />
+//   </div>
+//   );
+// }
+// }
+
+function SensorChart() {
+  const chartContainer = useRef(null);
+  const [chartInstance, setChartInstance] = useState(null);
+  
+  useEffect(() => {
+    if (chartContainer && chartContainer.current) {
+      
+
+      axios.get(process.env.REACT_APP_API + "/GetHistoricalSensorValues").then(response => {
+        var data = response.data;
+        data.sort(function(x, y) {
+          return Date.parse(x.Timestamp) - Date.parse(y.Timestamp);
+        });
+
+        let dataLabels = data.map(function(t) { 
+          var d = new Date(t.Timestamp);
+          return d.toLocaleTimeString();
+        });
+        let dataValues =  data.map(function(t) {return t.Value });
+
+        const chartConfig = {
+          type: 'line',        
+          data: {
+            labels: dataLabels,
+            datasets: [{
+            label: 'Franke Sensor 1',
+            data: dataValues
+            }]
+          }
+        }
+        const newChartInstance = new Chart(chartContainer.current, chartConfig);
+        setChartInstance(newChartInstance);
+      }); 
+    }
+    
+  }, [chartContainer]);
+
+  return (
+    <div>
+      <canvas ref={chartContainer} />
+    </div>
+  );
 }
 
 export default SensorChart;

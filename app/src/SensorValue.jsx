@@ -7,7 +7,7 @@ function SensorValue() {
 
 
   useEffect(() => {
-    axios.get(process.env.REACT_APP_API + "/GetCurrentSensorValue?sensorid=moisturesensor1").then(response => {
+    axios.get(process.env.REACT_APP_API + "/GetCurrentSensorValue?sensorid=frankesensor-1").then(response => {
       setSensorValue(response.data);
     })
   }, []);

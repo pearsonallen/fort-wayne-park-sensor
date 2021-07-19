@@ -1,10 +1,9 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Chart from 'chart.js/auto'
 import axios from 'axios';
 
 function SensorChart() {
   const chartContainer = useRef(null);
-  const [chartInstance, setChartInstance] = useState(null);
   
   useEffect(() => {
     if (chartContainer && chartContainer.current) {
@@ -32,8 +31,7 @@ function SensorChart() {
             }]
           }
         }
-        const newChartInstance = new Chart(chartContainer.current, chartConfig);
-        setChartInstance(newChartInstance);
+        new Chart(chartContainer.current, chartConfig);
       }); 
     }
     

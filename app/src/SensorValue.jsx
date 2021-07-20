@@ -10,7 +10,7 @@ function SensorValue(props) {
     if (val > checkVal && prevVal == null) {
       return checkVal;
     }
-    if (last == true) {
+    if (last === true) {
       let c = Math.min(val - prevVal,checkVal - prevVal);
       return Math.max(c,val - prevVal);
     }

@@ -6,9 +6,13 @@ function SensorValue(props) {
   const [sensorValue, setSensorValue] = useState(0);
   const chartContainer = useRef(null);
 
-  function showAmount(val,checkVal, prevVal) {
+  function showAmount(val,checkVal, prevVal, last) {
     if (val > checkVal && prevVal == null) {
       return checkVal;
+    }
+    if (last == true) {
+      let c = Math.min(val - prevVal,checkVal - prevVal);
+      return Math.max(c,val - prevVal);
     }
     if (prevVal != null) {      
       return Math.min(val - prevVal,checkVal - prevVal);      
@@ -24,7 +28,7 @@ function SensorValue(props) {
       let redStop = props.redStop; let cautionStop = props.cautionStop; let greenStop = props.greenStop;
       let redAmount = showAmount(val,redStop);
       let cautionAmount = showAmount(val, cautionStop, redStop);
-      let greenAmount = showAmount(val,greenStop,cautionStop);
+      let greenAmount = showAmount(val,greenStop,cautionStop, true);
 
       const chartConfig = {
         type: 'bar',

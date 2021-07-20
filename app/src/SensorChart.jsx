@@ -8,7 +8,6 @@ function SensorChart() {
   useEffect(() => {
     if (chartContainer && chartContainer.current) {
       
-
       axios.get(process.env.REACT_APP_API + "/GetHistoricalSensorValues").then(response => {
         var data = response.data;
         data.sort(function(x, y) {
@@ -26,7 +25,7 @@ function SensorChart() {
           data: {
             labels: dataLabels,
             datasets: [{
-            label: 'Franke Sensor 1',
+            label: 'East Side',
             data: dataValues
             }]
           }
@@ -38,7 +37,7 @@ function SensorChart() {
   }, [chartContainer]);
 
   return (
-    <div>
+    <div class="container">
       <canvas ref={chartContainer} />
     </div>
   );

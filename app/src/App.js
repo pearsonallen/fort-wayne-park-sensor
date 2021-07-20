@@ -1,15 +1,24 @@
-import './App.css';
+import './App.scss';
 import SensorValue from './SensorValue'
 import SensorChart from './SensorChart';
 
 function App() {
   return (
-    <section className="App">
-      <h1>Fort Wayne Franke Park Trail Condition</h1>
-      <h2>How muddy is the trail?</h2>
-        <SensorValue />
+    <article class="post">
+      <div class="container">
+        <h2>Franke Park Mountain Bike Trail Conditions</h2>
+      </div>
+      <div class="container columns thirds">
+      <div class="item">
+        <div class="item-title">
+          East Side
+        </div>
+
+        <SensorValue sensorID="frankesensor-1" />
+      </div>
+      </div>
         <SensorChart />
-    </section>
+    </article>
   );
 }
 

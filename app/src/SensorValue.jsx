@@ -33,7 +33,7 @@ function SensorValue(props) {
   }, [chartContainer, props]);
 
   return (<p>
-    The wettest soil is {sensorValue}
+    The soil dryness in this area is {sensorValue}
     <canvas ref={chartContainer} />
   </p>)
 }

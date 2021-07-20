@@ -6,7 +6,7 @@ function App() {
   return (
     <article class="post">
       <div class="container">
-        <h2>Franke Park Mountain Bike Trail Conditions</h2>
+        <h2></h2>
       </div>
       <div class="container columns thirds">
       <div class="item">

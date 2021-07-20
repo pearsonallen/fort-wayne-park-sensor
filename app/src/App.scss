@@ -2,7 +2,7 @@
 $lightblue: #D7F7FE;
 $darkblue: #1A577F;
 $medblue: #1F729C;
-$salmon: #FF6067;
+$headerBackgound: #4492be;
 $hellayellow: #F7EE1A;
 
 //Typography
@@ -38,7 +38,7 @@ body {
 }
 
 .header {
-  background: $salmon;
+  background: $headerBackgound;
   color: white;
   padding: em(10px);
   .container {

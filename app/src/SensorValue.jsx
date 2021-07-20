@@ -5,10 +5,26 @@ import React, { useState, useEffect, useRef } from "react";
 function SensorValue(props) {
   const [sensorValue, setSensorValue] = useState(0);
   const chartContainer = useRef(null);
+
+  function showAmount(val,checkVal, prevVal) {
+    if (val > checkVal && prevVal == null) {
+      return checkVal;
+    }
+    if (prevVal != null) {      
+      return Math.min(val - prevVal,checkVal - prevVal);      
+    }
+  }
+
   useEffect(() => {
     if (chartContainer && chartContainer.current) {
     axios.get(process.env.REACT_APP_API + "/GetCurrentSensorValue?sensorid=" + props.sensorID).then(response => {
       setSensorValue(response.data);
+      let val = response.data;
+
+      let redStop = props.redStop; let cautionStop = props.cautionStop; let greenStop = props.greenStop;
+      let redAmount = showAmount(val,redStop);
+      let cautionAmount = showAmount(val, cautionStop, redStop);
+      let greenAmount = showAmount(val,greenStop,cautionStop);
 
       const chartConfig = {
         type: 'bar',
@@ -17,14 +33,37 @@ function SensorValue(props) {
           x: {
             min: 360,
             max: 450,
+            stacked: true
           }
-        }},        
+        },
+        plugins: {
+          legend: {
+              display: false
+          }
+      }
+      },        
         data: {
           labels: [""],
-          datasets: [{
+          datasets: [
+          {
             label: '',
-            data: [response.data]
-          }]
+            data: [redAmount],
+            backgroundColor: '#ff1000',
+            stack: 'Stack 0'
+          },
+          {
+            label: '',
+            data: [cautionAmount],
+            backgroundColor: '#ff8000',
+            stack: 'Stack 0'
+          },
+          {
+            label: '',
+            data: [greenAmount],
+            backgroundColor: '#50C878',
+            stack: 'Stack 0'
+          },
+        ]
         }
       }
       new Chart(chartContainer.current, chartConfig);

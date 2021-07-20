@@ -14,7 +14,7 @@ function App() {
           East Side
         </div>
 
-        <SensorValue sensorID="frankesensor-1" />
+        <SensorValue sensorID="frankesensor-1" redStop="380" cautionStop="390" greenStop="395" />
       </div>
       </div>
         <SensorChart />

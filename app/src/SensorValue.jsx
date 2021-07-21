@@ -5,6 +5,7 @@ import React, { useState, useEffect, useRef } from "react";
 function SensorValue(props) {
   const [sensorValue, setSensorValue] = useState(0);
   const chartContainer = useRef(null);
+  const [cardColor, setCardColor] = useState("");
 
   function showAmount(val,checkVal, prevVal, last) {
     if (val > checkVal && prevVal == null) {
@@ -23,9 +24,18 @@ function SensorValue(props) {
     if (chartContainer && chartContainer.current) {
     axios.get(process.env.REACT_APP_API + "/GetCurrentSensorValue?sensorid=" + props.sensorID).then(response => {
       setSensorValue(response.data);
-      let val = response.data;
-
       let redStop = props.redStop; let cautionStop = props.cautionStop; let greenStop = props.greenStop;
+
+      let val = response.data;
+      let cardColor = "";
+      if (val >= greenStop) {
+        cardColor = "good";
+      } else if (val >= cautionStop) {
+        cardColor = "caution";        
+      } else {
+        cardColor = "warning";
+      }
+      setCardColor(cardColor);
       let redAmount = showAmount(val,redStop);
       let cautionAmount = showAmount(val, cautionStop, redStop);
       let greenAmount = showAmount(val,greenStop,cautionStop, true);
@@ -75,10 +85,21 @@ function SensorValue(props) {
   }
   }, [chartContainer, props]);
 
-  return (<p>
+  const cardClassName = "item " + cardColor;
+  const dotClassName = "dot " + cardColor;
+  return (
+    <div className={cardClassName}>
+    <div class="item-title">
+      <p class="cardTitle">East Side</p>
+      <p className={dotClassName}></p>
+    </div>
+    <div class="clear"></div>
+  <p>
     The soil dryness in this area is {sensorValue}
     <canvas ref={chartContainer} />
-  </p>)
+  </p>
+  </div>
+  )
 }
 
 export default SensorValue;

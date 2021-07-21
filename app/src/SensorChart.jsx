@@ -5,6 +5,10 @@ import axios from 'axios';
 function SensorChart() {
   const chartContainer = useRef(null);
   
+  function map (val) {
+    return (val - 366) * (100 - 0) / (599 - 366) + 0;
+  }
+  
   useEffect(() => {
     if (chartContainer && chartContainer.current) {
       
@@ -18,7 +22,7 @@ function SensorChart() {
           var d = new Date(t.Timestamp);
           return d.toLocaleTimeString();
         });
-        let dataValues =  data.map(function(t) {return t.Value });
+        let dataValues =  data.map(function(t) {return map(t.Value); });
 
         const chartConfig = {
           type: 'line',        

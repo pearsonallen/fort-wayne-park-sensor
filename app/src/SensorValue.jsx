@@ -7,6 +7,10 @@ function SensorValue(props) {
   const chartContainer = useRef(null);
   const [cardColor, setCardColor] = useState("");
 
+  function map (val) {
+    return (val - 366) * (100 - 0) / (599 - 366) + 0;
+  }
+
   function showAmount(val,checkVal, prevVal, last) {
     if (val > checkVal && prevVal == null) {
       return checkVal;
@@ -23,10 +27,15 @@ function SensorValue(props) {
   useEffect(() => {
     if (chartContainer && chartContainer.current) {
     axios.get(process.env.REACT_APP_API + "/GetCurrentSensorValue?sensorid=" + props.sensorID).then(response => {
-      setSensorValue(response.data);
       let redStop = props.redStop; let cautionStop = props.cautionStop; let greenStop = props.greenStop;
 
+      redStop = map(redStop);
+      cautionStop = map(cautionStop);
+      greenStop = map(greenStop);
+
       let val = response.data;
+      val = map(val);
+      setSensorValue(Math.round(val));
       let cardColor = "";
       if (val >= greenStop) {
         cardColor = "good";
@@ -45,8 +54,8 @@ function SensorValue(props) {
         options: {indexAxis: 'y',
         scales: {
           x: {
-            min: 360,
-            max: 450,
+            min: 0,
+            max: 100,
             stacked: true
           }
         },
@@ -95,7 +104,7 @@ function SensorValue(props) {
     </div>
     <div class="clear"></div>
   <p>
-    The soil dryness in this area is {sensorValue}
+    The soil dryness in this area is {sensorValue}%
     <canvas ref={chartContainer} />
   </p>
   </div>

@@ -1,6 +1,7 @@
 import './App.scss';
 import SensorValue from './SensorValue'
 import SensorChart from './SensorChart';
+import SensorMap from './SensorMap';
 
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
       <div class="container columns thirds">
         <SensorValue sensorID="frankesensor-1" redStop="380" cautionStop="390" greenStop="395" />
       </div>
+        <SensorMap />
         <SensorChart />
     </article>
   );

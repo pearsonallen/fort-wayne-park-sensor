@@ -10,10 +10,15 @@ function App() {
       <div class="container">
         <h2> </h2>
       </div>
-      <div class="container columns thirds">
-        <SensorValue sensorID="frankesensor-1" redStop="380" cautionStop="390" greenStop="395" />
+      <div class="status-container">
+        <div class=" map-container">
+          <SensorMap />
+        </div>
+        <div class="card-container">
+          <SensorValue sensorID="frankesensor-1" redStop="380" cautionStop="390" greenStop="395" />
+        </div>
       </div>
-        <SensorMap />
+
         <SensorChart />
     </article>
   );

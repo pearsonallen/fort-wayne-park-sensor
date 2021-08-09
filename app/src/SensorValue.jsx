@@ -6,6 +6,10 @@ function SensorValue(props) {
   const [sensorValue, setSensorValue] = useState(0);
   const chartContainer = useRef(null);
   const [cardColor, setCardColor] = useState("");
+  const favicon = getFaviconEl();
+  function getFaviconEl() {
+    return document.getElementById("favicon");
+  }
 
   function map (val) {
     return (val - 366) * (100 - 0) / (599 - 366) + 0;
@@ -36,13 +40,17 @@ function SensorValue(props) {
       let val = response.data;
       val = map(val);
       setSensorValue(Math.round(val));
+      getFaviconEl();
       let cardColor = "";
       if (val >= greenStop) {
         cardColor = "good";
+        favicon.href = window.location.href + "favicon-green.ico";
       } else if (val >= cautionStop) {
-        cardColor = "caution";        
+        cardColor = "caution";  
+        favicon.href = window.location.href + "favicon-yellow.ico";
       } else {
         cardColor = "warning";
+        favicon.href = window.location.href + "favicon-red.ico";
       }
       setCardColor(cardColor);
       let redAmount = showAmount(val,redStop);

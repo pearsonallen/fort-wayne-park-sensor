@@ -14,8 +14,14 @@ function App() {
         <div class=" map-container">
           <SensorMap />
         </div>
-        <div class="card-container">
-          <SensorValue sensorID="frankesensor-1" redStop="380" cautionStop="390" greenStop="395" />
+        <div class="sensor-container">
+          <div class="card-container">
+            <SensorValue sensorID="frankesensor-1" redStop="380" cautionStop="390" greenStop="395" />
+          </div>
+          <div class="card-container">
+            <SensorValue sensorID="frankesensor-2" redStop="380" cautionStop="390" greenStop="395" />
+            
+          </div>
         </div>
       </div>
 

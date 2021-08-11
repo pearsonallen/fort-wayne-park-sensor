@@ -6,6 +6,10 @@ function SensorValue(props) {
   const [sensorValue, setSensorValue] = useState(0);
   const chartContainer = useRef(null);
   const [cardColor, setCardColor] = useState("");
+  const favicon = useRef(getFaviconEl());
+  function getFaviconEl() {
+    return document.getElementById("favicon");
+  }
 
   function map (val) {
     return (val - 366) * (100 - 0) / (599 - 366) + 0;
@@ -28,7 +32,6 @@ function SensorValue(props) {
     if (chartContainer && chartContainer.current) {
     axios.get(process.env.REACT_APP_API + "/GetCurrentSensorValue?sensorid=" + props.sensorID).then(response => {
       let redStop = props.redStop; let cautionStop = props.cautionStop; let greenStop = props.greenStop;
-
       redStop = map(redStop);
       cautionStop = map(cautionStop);
       greenStop = map(greenStop);
@@ -36,13 +39,17 @@ function SensorValue(props) {
       let val = response.data;
       val = map(val);
       setSensorValue(Math.round(val));
+      getFaviconEl();
       let cardColor = "";
       if (val >= greenStop) {
         cardColor = "good";
+        favicon.current.href = window.location.href + "favicon-green.ico";
       } else if (val >= cautionStop) {
-        cardColor = "caution";        
+        cardColor = "caution";  
+        favicon.current.href = window.location.href + "favicon-yellow.ico";
       } else {
         cardColor = "warning";
+        favicon.current.href = window.location.href + "favicon-red.ico";
       }
       setCardColor(cardColor);
       let redAmount = showAmount(val,redStop);

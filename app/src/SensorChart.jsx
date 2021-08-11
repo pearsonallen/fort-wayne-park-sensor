@@ -24,6 +24,13 @@ function SensorChart() {
         });
         let dataValues_1 =  data.map(function(t)  { if (t.DeviceID === 'frankesensor-1')  {return map(t.Value); } else { return undefined} }).filter(x => x !== undefined);
         let dataValues_2 =  data.map(function(t)  { if (t.DeviceID === 'frankesensor-2') { return map(t.Value);} else { return undefined} }).filter(x => x !== undefined);
+        let bufferedDataset2 = [];
+        if (dataValues_2.length < dataValues_1.length) {
+          let countDiff = dataValues_1.length - dataValues_2.length;
+          let buffer = Array(countDiff);
+          buffer.fill(undefined);
+          bufferedDataset2 = [...buffer, ...dataValues_2];
+        }
         const chartConfig = {
           type: 'line',        
           data: {
@@ -34,7 +41,7 @@ function SensorChart() {
             },
             {
               label: 'West Side',
-              data: dataValues_2
+              data: bufferedDataset2
               }]
           }
         }

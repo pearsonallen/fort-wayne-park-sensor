@@ -6,7 +6,8 @@ function SensorChart() {
   const chartContainer = useRef(null);
   
   function map (val) {
-    return (val - 366) * (100 - 0) / (599 - 366) + 0;
+    let r = (val - 366) * (100 - 0) / (599 - 366) + 0;
+    return r <= 0 ? 0 : r;
   }
   
   useEffect(() => {

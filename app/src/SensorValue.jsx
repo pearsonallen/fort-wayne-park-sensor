@@ -51,7 +51,7 @@ function SensorValue(props) {
         cardColor = "caution";  
         favicon.current.href = window.location.href + "favicon-yellow.ico";
       } else {
-        cardColor = "warning";
+        cardColor = "danger";
         favicon.current.href = window.location.href + "favicon-red.ico";
       }
       setCardColor(cardColor);

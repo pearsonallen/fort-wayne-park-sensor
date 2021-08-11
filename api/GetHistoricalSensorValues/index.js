@@ -6,7 +6,7 @@ module.exports = async function (context, req) {
     
     var date = new Date();
     date.setHours(date.getHours() - 23);
-    var whereClause = ["DeviceID eq 'frankesensor-1' and Timestamp ge datetime'", date.toISOString(), "'"].join('');
+    var whereClause = ["(DeviceID eq 'frankesensor-1' or DeviceID eq 'frankesensor-2') and Timestamp ge datetime'", date.toISOString(), "'"].join('');
     let query = new azure.TableQuery()
     .where(whereClause);
     let r = await queryEntities(tableSvc, 'SensorValues', query, null);

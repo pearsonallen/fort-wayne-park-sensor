@@ -26,6 +26,9 @@ function SensorValue(props) {
     if (prevVal != null) {      
       return Math.min(val - prevVal,checkVal - prevVal);      
     }
+    if (val < checkVal) {
+      return val;
+    }
   }
 
   useEffect(() => {
@@ -106,7 +109,7 @@ function SensorValue(props) {
   return (
     <div className={cardClassName}>
     <div class="item-title">
-      <p class="cardTitle">East Side</p>
+      <p class="cardTitle">{props.siteName}</p>
       <p className={dotClassName}></p>
     </div>
     <div class="clear"></div>

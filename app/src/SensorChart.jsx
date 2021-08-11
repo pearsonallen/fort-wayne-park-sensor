@@ -18,20 +18,24 @@ function SensorChart() {
           return Date.parse(x.Timestamp) - Date.parse(y.Timestamp);
         });
 
-        let dataLabels = data.map(function(t) { 
+        let dataLabels = data.filter(x=>x.DeviceID==="frankesensor-1").map(function(t) { 
           var d = new Date(t.Timestamp);
           return d.toLocaleTimeString();
         });
-        let dataValues =  data.map(function(t) {return map(t.Value); });
-
+        let dataValues_1 =  data.map(function(t)  { if (t.DeviceID === 'frankesensor-1')  {return map(t.Value); } else { return undefined} }).filter(x => x !== undefined);
+        let dataValues_2 =  data.map(function(t)  { if (t.DeviceID === 'frankesensor-2') { return map(t.Value);} else { return undefined} }).filter(x => x !== undefined);
         const chartConfig = {
           type: 'line',        
           data: {
             labels: dataLabels,
             datasets: [{
             label: 'East Side',
-            data: dataValues
-            }]
+            data: dataValues_1
+            },
+            {
+              label: 'West Side',
+              data: dataValues_2
+              }]
           }
         }
         new Chart(chartContainer.current, chartConfig);

@@ -16,11 +16,10 @@ function App() {
         </div>
         <div class="sensor-container">
           <div class="card-container">
-            <SensorValue sensorID="frankesensor-1" redStop="380" cautionStop="390" greenStop="395" />
+            <SensorValue sensorID="frankesensor-1" siteName="East Side" redStop="380" cautionStop="390" greenStop="395" />
           </div>
           <div class="card-container">
-            <SensorValue sensorID="frankesensor-2" redStop="380" cautionStop="390" greenStop="395" />
-            
+            <SensorValue sensorID="frankesensor-2" siteName="West Side" redStop="380" cautionStop="390" greenStop="395" />
           </div>
         </div>
       </div>

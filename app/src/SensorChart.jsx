@@ -37,11 +37,15 @@ function SensorChart() {
             labels: dataLabels,
             datasets: [{
             label: 'East Side',
-            data: dataValues_1
+            data: dataValues_1,
+            backgroundColor: '#7450AF',
+            borderColor: '#6C58A7'
             },
             {
               label: 'West Side',
-              data: bufferedDataset2
+              data: bufferedDataset2,
+              backgroundColor: '#8BAF50',
+              borderColor: '#93A758'
               }]
           }
         }
@@ -52,7 +56,7 @@ function SensorChart() {
   }, [chartContainer]);
 
   return (
-    <div class="container">
+    <div className="container">
       <canvas ref={chartContainer} />
     </div>
   );

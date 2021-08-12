@@ -3,10 +3,13 @@ import Chart from 'chart.js/auto'
 import React, { useState, useEffect, useRef } from "react";
 
 function SensorValue(props) {
+
   const [sensorValue, setSensorValue] = useState(0);
   const chartContainer = useRef(null);
   const [cardColor, setCardColor] = useState("");
   const favicon = useRef(getFaviconEl());
+
+
   function getFaviconEl() {
     return document.getElementById("favicon");
   }
@@ -108,11 +111,11 @@ function SensorValue(props) {
   const dotClassName = "dot " + cardColor;
   return (
     <div className={cardClassName}>
-    <div class="item-title">
-      <p class="cardTitle">{props.siteName}</p>
+    <div className="item-title">
+      <p className="cardTitle">{props.siteName}</p>
       <p className={dotClassName}></p>
     </div>
-    <div class="clear"></div>
+    <div className="clear"></div>
   <p>
     The soil dryness in this area is {sensorValue}%
     <canvas ref={chartContainer} />

@@ -22,7 +22,27 @@ p {
 
 .container {
   margin: 0 auto;
-  max-width: 75em;
+  max-width: 95vw;
+}
+
+@media (min-width: 768px) {
+  .container {
+    margin: 0 auto;
+    max-width: 75em;
+  }
+}
+
+.warning-message {
+  h2 {
+    text-align: center;
+    font-size: 4.8rem;
+  }
+  &.closed h2{
+    color: $danger!important;
+  }
+  &.open h2{
+    color: $easy;
+  }
 }
 
 .status-container {
@@ -34,6 +54,10 @@ p {
 }
 
 .map-container {
+  width: 100%;
+}
+
+.sensor-container {
   width: 100%;
 }
 
@@ -178,6 +202,12 @@ h3 {
 
   &:hover {
     fill: lighten($moderate, 30%);
+  }
+}
+
+.closed {
+  path {
+    fill: $danger!important;
   }
 }
 

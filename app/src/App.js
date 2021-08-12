@@ -4,7 +4,7 @@ import SensorChart from './SensorChart';
 import SensorMap from './SensorMap';
 import React, { useState } from "react";
 
-function App(props) {
+function App() {
 
   const [westSideStatusClass, setWestSideStatusClass] = useState("");
   const [eastSideStatusClass, setEastSideStatusClass] = useState("");
@@ -19,7 +19,7 @@ function App(props) {
 
   return (
     <article className="post">
-       <div className={'container warning-message ${eastSideStatusClass == "closed" || westSideStatusClass == "closed" ? "closed" : "open"}'}>
+       <div className={'container warning-message ' + (eastSideStatusClass === "closed" || westSideStatusClass === "closed" ? "closed" : "open")}>
         <h2>Trails are CLOSED</h2>
       </div>
       <div className="status-container">
@@ -33,7 +33,6 @@ function App(props) {
           <div className="card-container">
             <SensorValue sensorID="frankesensor-2" siteName="West Side" redStop="380" cautionStop="390" greenStop="395"  updateSideClosed={() => updateSideClosed("west")} />
           </div>
-          {console.log(westSideStatusClass)}
         </div>
       </div>
       <SensorChart />

@@ -22,7 +22,7 @@ p {
 
 .container {
   margin: 0 auto;
-  max-width: 95vw;
+  max-width: 100vw;
 }
 
 @media (min-width: 768px) {
@@ -51,15 +51,21 @@ p {
   flex-wrap: wrap;
   margin: 0 auto;
   padding: 25px;
-  width: 100vw;
+  width: calc( 100vw - 50px );
 }
 
 .map-container {
+  padding-bottom: 25px;
   width: 100%;
 }
 
 .sensor-container {
   width: 100%;
+}
+
+.chart-container {
+  padding: 25px;
+  width: calc( 100vw - 50px);
 }
 
 @media (min-width: 768px) {
@@ -71,6 +77,14 @@ p {
   .map-container {
     margin-right: 5%;
     width: 66%;
+  }
+
+  .sensor-container {
+    max-width: 40%;
+  }
+
+  .chart-container {
+    width: 100%;
   }
 
 }

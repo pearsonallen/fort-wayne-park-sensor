@@ -56,7 +56,7 @@ function SensorChart() {
   }, [chartContainer]);
 
   return (
-    <div className="container">
+    <div className="container chart-container">
       <canvas ref={chartContainer} />
     </div>
   );

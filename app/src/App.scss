@@ -38,10 +38,11 @@ p {
     font-size: 4.8rem;
   }
   &.closed h2{
+    display: block;
     color: $danger!important;
   }
   &.open h2{
-    color: $easy;
+    display: none;
   }
 }
 

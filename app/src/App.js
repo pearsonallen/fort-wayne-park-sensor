@@ -19,9 +19,8 @@ function App(props) {
 
   return (
     <article className="post">
-      {/* Also Need value from SensorValue to state if the trails are open or not & Classes updated */}
-      <div className="container warning-message closed/open">
-        <h2>Trails are CLOSED/OPEN</h2>
+       <div className={'container warning-message ${eastSideStatusClass == "closed" || westSideStatusClass == "closed" ? "closed" : "open"}'}>
+        <h2>Trails are CLOSED</h2>
       </div>
       <div className="status-container">
         <div className=" map-container">
@@ -37,8 +36,7 @@ function App(props) {
           {console.log(westSideStatusClass)}
         </div>
       </div>
-{/*   TODO: Need to pass values from SensorValue to App so they can be used to trigger a "closed" class in this component*/} 
-      <SensorChart westSideStatus={westSideStatusClass} eastSideStatus={eastSideStatusClass} />
+      <SensorChart />
     </article>
   )
 }

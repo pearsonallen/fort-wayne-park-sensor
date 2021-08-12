@@ -11,7 +11,6 @@ function SensorChart() {
   
   useEffect(() => {
     if (chartContainer && chartContainer.current) {
-      
       axios.get(process.env.REACT_APP_API + "/GetHistoricalSensorValues").then(response => {
         var data = response.data;
         data.sort(function(x, y) {
@@ -49,6 +48,7 @@ function SensorChart() {
               }]
           }
         }
+        
         new Chart(chartContainer.current, chartConfig);
       }); 
     }

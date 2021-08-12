@@ -9,7 +9,6 @@ function SensorValue(props) {
   const [cardColor, setCardColor] = useState("");
   const favicon = useRef(getFaviconEl());
 
-
   function getFaviconEl() {
     return document.getElementById("favicon");
   }
@@ -56,6 +55,7 @@ function SensorValue(props) {
       } else {
         cardColor = "danger";
         favicon.current.href = window.location.href + "favicon-red.ico";
+        props.updateSideClosed();
       }
       setCardColor(cardColor);
       let redAmount = showAmount(val,redStop);
@@ -105,7 +105,7 @@ function SensorValue(props) {
       new Chart(chartContainer.current, chartConfig);
     });
   }
-  }, [chartContainer, props]);
+  }, [chartContainer, props.sensorID,props.redStop,props.cautionStop,props.greenStop]);
 
   const cardClassName = "item " + cardColor;
   const dotClassName = "dot " + cardColor;

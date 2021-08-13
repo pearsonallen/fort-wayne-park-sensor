@@ -8,7 +8,8 @@ function SensorValue(props) {
   const chartContainer = useRef(null);
   const [cardColor, setCardColor] = useState("");
   const favicon = useRef(getFaviconEl());
-
+  const {greenStop, cautionStop, redStop, sensorID} = props;
+  const {updateSideClosed} = props;
   function getFaviconEl() {
     return document.getElementById("favicon");
   }
@@ -35,11 +36,11 @@ function SensorValue(props) {
 
   useEffect(() => {
     if (chartContainer && chartContainer.current) {
-    axios.get(process.env.REACT_APP_API + "/GetCurrentSensorValue?sensorid=" + props.sensorID).then(response => {
-      let redStop = props.redStop; let cautionStop = props.cautionStop; let greenStop = props.greenStop;
-      redStop = map(redStop);
-      cautionStop = map(cautionStop);
-      greenStop = map(greenStop);
+    axios.get(process.env.REACT_APP_API + "/GetCurrentSensorValue?sensorid=" + sensorID).then(response => {
+      //let redStop = props.redStop; let cautionStop = props.cautionStop; let greenStop = props.greenStop;
+      let rStop = map(redStop);
+      let cStop = map(cautionStop);
+      let gStop = map(greenStop);
 
       let val = response.data;
       val = map(val);
@@ -55,12 +56,13 @@ function SensorValue(props) {
       } else {
         cardColor = "danger";
         favicon.current.href = window.location.href + "favicon-red.ico";
-        props.updateSideClosed();
+        updateSideClosed();
       }
       setCardColor(cardColor);
-      let redAmount = showAmount(val,redStop);
-      let cautionAmount = showAmount(val, cautionStop, redStop);
-      let greenAmount = showAmount(val,greenStop,cautionStop, true);
+      let redAmount = showAmount(val,rStop);
+      let cautionAmount = showAmount(val, cStop, rStop);
+      let greenAmount = showAmount(val,gStop,cStop, true);
+      
 
       const chartConfig = {
         type: 'bar',
@@ -105,7 +107,8 @@ function SensorValue(props) {
       new Chart(chartContainer.current, chartConfig);
     });
   }
-  }, [chartContainer, props.sensorID,props.redStop,props.cautionStop,props.greenStop]);
+  // eslint-disable-next-line
+  }, [chartContainer, redStop, cautionStop, greenStop, sensorID]);
 
   const cardClassName = "item " + cardColor;
   const dotClassName = "dot " + cardColor;

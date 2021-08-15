@@ -33,7 +33,7 @@ function SensorValue(props) {
       if (val >= gStop) {
         cardColor = "good";
         favicon.current.href = window.location.href + "favicon-green.ico";
-      } else if (val >= cStop) {
+      } else if (val >= rStop) {
         cardColor = "caution";  
         favicon.current.href = window.location.href + "favicon-yellow.ico";
       } else {

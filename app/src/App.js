@@ -1,5 +1,5 @@
 import './App.scss';
-import SensorValue from './SensorValue'
+import SensorCard from './SensorCard'
 import SensorChart from './SensorChart';
 import SensorMap from './SensorMap';
 import React, { useState } from "react";
@@ -28,10 +28,10 @@ function App() {
         </div>
         <div className="sensor-container">
           <div className="card-container">
-            <SensorValue sensorID="frankesensor-1" siteName="East Side" redStop="380" cautionStop="390" greenStop="395" updateSideClosed={() => updateSideClosed("east")} />
+            <SensorCard sensorID="frankesensor-1" siteName="East Side" redStop="380" cautionStop="390" greenStop="395" updateSideClosed={() => updateSideClosed("east")} />
           </div>
           <div className="card-container">
-            <SensorValue sensorID="frankesensor-2" siteName="West Side" redStop="380" cautionStop="390" greenStop="395"  updateSideClosed={() => updateSideClosed("west")} />
+            <SensorCard sensorID="frankesensor-2" siteName="West Side" redStop="380" cautionStop="390" greenStop="395"  updateSideClosed={() => updateSideClosed("west")} />
           </div>
         </div>
       </div>

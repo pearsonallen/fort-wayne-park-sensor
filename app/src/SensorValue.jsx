@@ -1,9 +1,8 @@
 import axios from 'axios';
-import Chart from 'chart.js/auto'
+import Gauge from 'chartjs-gauge'
 import React, { useState, useEffect, useRef } from "react";
 
 function SensorValue(props) {
-
   const [sensorValue, setSensorValue] = useState(0);
   const chartContainer = useRef(null);
   const [cardColor, setCardColor] = useState("");
@@ -19,26 +18,9 @@ function SensorValue(props) {
     return r <= 0 ? 0 : r;
   }
 
-  function showAmount(val,checkVal, prevVal, last) {
-    if (val > checkVal && prevVal == null) {
-      return checkVal;
-    }
-    if (last === true) {
-      let c = Math.min(val - prevVal,checkVal - prevVal);
-      return Math.max(c,val - prevVal);
-    }
-    if (prevVal != null) {      
-      return Math.min(val - prevVal,checkVal - prevVal);      
-    }
-    if (val < checkVal) {
-      return val;
-    }
-  }
-
   useEffect(() => {
     if (chartContainer && chartContainer.current) {
     axios.get(process.env.REACT_APP_API + "/GetCurrentSensorValue?sensorid=" + sensorID).then(response => {
-      //let redStop = props.redStop; let cautionStop = props.cautionStop; let greenStop = props.greenStop;
       let rStop = map(redStop);
       let cStop = map(cautionStop);
       let gStop = map(greenStop);
@@ -48,10 +30,10 @@ function SensorValue(props) {
       setSensorValue(Math.round(val));
       getFaviconEl();
       let cardColor = "";
-      if (val >= greenStop) {
+      if (val >= gStop) {
         cardColor = "good";
         favicon.current.href = window.location.href + "favicon-green.ico";
-      } else if (val >= cautionStop) {
+      } else if (val >= cStop) {
         cardColor = "caution";  
         favicon.current.href = window.location.href + "favicon-yellow.ico";
       } else {
@@ -60,52 +42,41 @@ function SensorValue(props) {
         updateSideClosed();
       }
       setCardColor(cardColor);
-      let redAmount = showAmount(val,rStop);
-      let cautionAmount = showAmount(val, cStop, rStop);
-      let greenAmount = showAmount(val,gStop,cStop, true);
       
-
       const chartConfig = {
-        type: 'bar',
-        options: {indexAxis: 'y',
-        scales: {
-          x: {
-            min: 0,
-            max: 100,
-            stacked: true
-          }
-        },
-        plugins: {
-          legend: {
-              display: false
-          }
-      }
-      },        
+        type: 'gauge',
         data: {
-          labels: [""],
-          datasets: [
-          {
-            label: '',
-            data: [redAmount],
-            backgroundColor: '#ff1000',
-            stack: 'Stack 0'
+          datasets: [{
+            value: val,
+            minValue: 0,
+            data: [rStop, cStop, 100],
+            backgroundColor: ['red', 'orange', 'green'],
+          }]
+        },
+        options: {
+          needle: {
+            radiusPercentage: 2,
+            widthPercentage: 3.2,
+            lengthPercentage: 80,
+            color: 'rgba(0, 0, 0, 1)'
           },
-          {
-            label: '',
-            data: [cautionAmount],
-            backgroundColor: '#ff8000',
-            stack: 'Stack 0'
-          },
-          {
-            label: '',
-            data: [greenAmount],
-            backgroundColor: '#50C878',
-            stack: 'Stack 0'
-          },
-        ]
+          valueLabel: {
+            display: true,
+            formatter: (value) => {
+              return Math.round(value) + '%';
+            },
+            color: 'rgba(255, 255, 255, 1)',
+            backgroundColor: 'rgba(0, 0, 0, 1)',
+            borderRadius: 5,
+            padding: {
+              top: 10,
+              bottom: 10
+            }
+          }
         }
       }
-      new Chart(chartContainer.current, chartConfig);
+      
+      new Gauge(chartContainer.current, chartConfig);
     });
   }
   // eslint-disable-next-line

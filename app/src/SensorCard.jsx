@@ -1,5 +1,4 @@
 import axios from 'axios';
-import GaugeChart from './GaugeChart';
 import React, { useState, useEffect, useRef } from "react";
 
 function SensorCard(props) {
@@ -60,17 +59,28 @@ function SensorCard(props) {
   }
 
   const cardClassName = "item " + cardColor;
-  const dotClassName = "dot " + cardColor;
   return (
     <div className={cardClassName}>
     <div className="item-title">
-      <p className="cardTitle">{props.siteName} - {sensorValue}% ({rideabilityDescription(sensorValue)})</p>
-      <p className={dotClassName}></p>
+      <h3 className="cardTitle">{props.siteName} </h3>
+      <p>{rideabilityDescription(sensorValue)}</p>
     </div>
-    <div className="clear"></div>
-  <p>
-    <GaugeChart cStop={cStop} rStop={rStop} value={sensorValue} />
-  </p>
+
+    <div className="gauge-wrapper">
+      <div className={'gauge three ' + cardColor}>
+        <div className="slice-colors">
+          <div className="st slice-item"></div>
+          <div className="st slice-item"></div>
+          <div className="st slice-item"></div>
+          <div className="st slice-item"></div>
+        </div>
+        <div className="needle"></div>
+        <div className="gauge-center">
+          <div className="label">DRY</div>
+          <div className="number">{100 - sensorValue}%</div>
+        </div>
+      </div>
+    </div>
   </div>
   )
 }

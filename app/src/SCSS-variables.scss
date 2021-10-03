@@ -7,9 +7,14 @@ $headerBackgound: #FFF;
 $hellayellow: #F7EE1A;
 $white: #FFF;
 $caution: #FFa500;
+$caution-transparent: rgba(255, 165, 0, .1);
 $danger: #ff0000;
+$danger-transparent: rgba(255, 0, 0, .1);
 $good: #00ff00;
+$good-transparent: rgba(0, 255, 0, .1);
 $dot-default: #BBB;
+$grey: #e7e7e7;
+$almost-black: #15222e;
 
 $easy: darken(#00FF00, 15%);
 $moderate: darken(#0000FF, 15%);
@@ -23,3 +28,7 @@ $heading-font-family: 'Righteous', sans-serif;
 
 //Others
 $transition: 0.25s ease all;
+$box-shadow: 0 -3px 6px 2px rgba(0, 0, 0, 0.5);
+$box-shadow-lite: 0 -13px 15px -10px rgba(0, 0, 0, 0.28);
+$box-shadow-lite-down: 0 2px 13px 3px rgba(0, 0, 0, .1);
+$gauge-radius: 100px 100px 0 0 !important;

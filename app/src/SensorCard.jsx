@@ -58,6 +58,16 @@ function SensorCard(props) {
     }
   }
 
+  const riskDescription = (sensorValue) => {
+    if (sensorValue <= rStop) {
+      return "HIGH";
+    } else if (sensorValue <= cStop) {
+      return "MODERATE";
+    } else {
+      return "LOW";
+    }
+  }
+
   const cardClassName = "item " + cardColor;
   return (
     <div className={cardClassName}>
@@ -76,10 +86,11 @@ function SensorCard(props) {
         </div>
         <div className="needle"></div>
         <div className="gauge-center">
-          <div className="label">DRY</div>
-          <div className="number">{100 - sensorValue}%</div>
+          <div className="label">RISK</div>
+          <div className="number">{riskDescription(sensorValue)}</div>
         </div>
       </div>
+      <div className="sensor-value-overlay"><strong>Dry %:</strong> {sensorValue}</div>
     </div>
   </div>
   )

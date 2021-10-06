@@ -76,11 +76,11 @@ p {
 
   .map-container {
     margin-right: 5%;
-    width: 66%;
+    width: 50%;
   }
 
   .sensor-container {
-    max-width: 40%;
+    max-width: 46%;
   }
 
   .chart-container {
@@ -141,10 +141,11 @@ h3 {
   color: $darkblue;
   margin-bottom: em(35px);
   overflow: hidden;
-  padding: 2.5rem;
+  padding: 1.5rem;
   position: relative;
   display: flex;
   justify-content: space-between;
+  min-width: 400px;
 
   &.caution {
     background-color: $caution-transparent;
@@ -265,7 +266,7 @@ h3 {
   margin: 1.1em 0 0.3em 0;
 }
 .gauge-center .number {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
 }
 .needle {
   width: 80px;
@@ -319,6 +320,20 @@ h3 {
   border-bottom: 50px #e84c3d solid;
   border-right: 50px #e84c3d solid;
   background-color: #e67e22;
+}
+
+.sensor-value-overlay {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  color: rgba(0,0,0, 0);
+  transition: 0.5s ease all;
+  transition-delay: 1s;
+  cursor: help;
+}
+
+.sensor-value-overlay:hover {
+  color: rgba(0,0,0, .3);
 }
 
 @keyframes caution {

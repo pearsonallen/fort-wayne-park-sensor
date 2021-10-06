@@ -8,12 +8,26 @@ function App() {
 
   const [westSideStatusClass, setWestSideStatusClass] = useState("");
   const [eastSideStatusClass, setEastSideStatusClass] = useState("");
+  const [eastSideHoverClass, setEastSideHoverClass] = useState("");
+  const [westSideHoverClass, setWestSideHoverClass] = useState("");
 
   const updateSideClosed = (side) => {
     if (side === "east") {
       setEastSideStatusClass("closed");
     } else if (side === "west") {
       setWestSideStatusClass("closed");
+    }
+  }
+
+  const setIsHovered = (side) => {
+    if (side === "east") {
+      setEastSideHoverClass("hovered");
+    } else if (side === "west") {
+      setWestSideHoverClass("hovered");
+    }
+    else {
+      setEastSideHoverClass("");
+      setWestSideHoverClass("");
     }
   }
 
@@ -24,14 +38,14 @@ function App() {
       </div>
       <div className="status-container">
         <div className=" map-container">
-          <SensorMap eastSideStatus={eastSideStatusClass} westSideStatus={westSideStatusClass} />
+          <SensorMap eastSideStatus={eastSideStatusClass} westSideStatus={westSideStatusClass} eastSideHoverStatus={eastSideHoverClass} westSideHoverStatus={westSideHoverClass} />
         </div>
         <div className="sensor-container">
-          <div className="card-container">
+          <div className="card-container" onMouseEnter={() => setIsHovered("east")} onMouseLeave={() => setIsHovered("")}>
             <SensorCard sensorID="frankesensor-1" siteName="East Side" redStop="380" cautionStop="390" greenStop="395" updateSideClosed={() => updateSideClosed("east")} />
           </div>
-          <div className="card-container">
-            <SensorCard sensorID="frankesensor-2" siteName="West Side" redStop="380" cautionStop="390" greenStop="395"  updateSideClosed={() => updateSideClosed("west")} />
+          <div className="card-container" onMouseEnter={() => setIsHovered("west")} onMouseLeave={() => setIsHovered("")}>
+            <SensorCard sensorID="frankesensor-2" siteName="West Side" redStop="380" cautionStop="390" greenStop="395"  updateSideClosed={() => updateSideClosed("west")}/>
           </div>
         </div>
       </div>

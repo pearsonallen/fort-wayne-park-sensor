@@ -222,6 +222,12 @@ h3 {
   }
 }
 
+.hovered {
+  path {
+    filter: drop-shadow(2px 4px 5px rgba(0,0,0, .75));
+  }
+}
+
 .clear {
   clear: both;
 }

@@ -37,13 +37,17 @@ p {
   justify-content: center;
 }
 
-.header-image-container img {
+.header-image-circle {
   width: 200px;
   height: 200px;
 }
 
 .header-image-container h1 {
   width: 300px;
+}
+
+.header-image-container-divider {
+  width: 500px
 }
 
 .warning-message {

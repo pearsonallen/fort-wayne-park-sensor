@@ -1,27 +1,22 @@
+@import "./sass/abstracts/variables";
 @import "./sass/abstracts/functions";
 @import "./sass/abstracts/mixins";
-@import "./sass/abstracts/variables";
+
 
 @import "./sass/base/animations";
 @import "./sass/base/base";
 @import "./sass/base/typography";
 @import "./sass/base/utilities";
 
-@import "./sass/components/button";
-@import "./sass/components/composition";
+@import "./sass/components/container";
+@import "./sass/components/gauge";
+@import "./sass/components/header"; 
+@import "./sass/components/item";
 
 @import "./sass/layout/grid";
 @import "./sass/layout/header";
 
 @import "./sass/pages/home";
-
-
-
-
-
-
-
-
 
 .closed {
   path {
@@ -34,10 +29,3 @@
     filter: drop-shadow(2px 4px 5px rgba(0,0,0, .75));
   }
 }
-
-
-
-
-
-
-

@@ -1,0 +1,69 @@
+body {
+    color: $base-font-color;
+    font-family: $base-font-family;
+    margin: 0;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  p {
+    margin: 8px 0;
+  }
+
+  .clear {
+    clear: both;
+  }
+  
+
+  .site-title,
+h1,
+h2,
+h3 {
+  color: darken($lightblue, 75%);
+  font-family: $heading-font-family;
+  font-size: em(42px);
+}
+
+h3 {
+  font-size: em(21px);
+  margin: 0;
+}
+
+.cls-1,
+.cls-3,
+.cls-4,
+.cls-7,
+.cls-11 {
+  fill: $easy;
+  transition: $transition;
+
+  &.closed {
+    fill: $danger !important;
+  }
+
+  &:hover {
+    fill: lighten($easy, 30%);
+  }
+}
+
+.cls-5,
+.cls-6,
+.cls-8,
+.cls-9,
+.cls-10,
+.cls-12,
+.cls-13,
+.cls-14 {
+  fill: $moderate;
+  transition: $transition;
+
+  &.closed {
+    fill: $danger !important;
+  }
+
+  &:hover {
+    fill: lighten($moderate, 30%);
+  }
+}

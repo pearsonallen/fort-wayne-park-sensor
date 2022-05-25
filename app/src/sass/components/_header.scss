@@ -1,0 +1,27 @@
+.header {
+    background: $headerBackgound;
+    padding: em(10px);
+  
+    .container {
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+  
+    .site-title,
+    .site-tagline {
+      font-weight: 400;
+      text-align: center;
+    }
+  
+    @media (min-width: 700px) {
+  
+      .site-title,
+      .site-tagline {
+        text-align: left;
+        width: 100%;
+      }
+    }
+  }

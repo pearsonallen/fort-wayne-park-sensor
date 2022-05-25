@@ -1,0 +1,27 @@
+@keyframes caution {
+    0% {
+      transform: rotate(0);
+    }
+    100% {
+      transform: rotate(115deg);
+    }
+  }
+  
+  @keyframes good {
+    0% {
+      transform: rotate(0);
+    }
+    100% {
+      transform: rotate(25deg);
+    }
+  }
+  
+  
+  @keyframes danger {
+    0% {
+      transform: rotate(0);
+    }
+    100% {
+      transform: rotate(165deg);
+    }
+  }

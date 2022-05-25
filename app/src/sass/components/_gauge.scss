@@ -1,0 +1,107 @@
+.gauge {
+    background: $grey;
+    box-shadow: $box-shadow;
+    width: 200px;
+    height: 100px;
+    border-radius: $gauge-radius;
+    position: relative;
+    overflow: hidden;
+  }
+  .gauge.min-scaled {
+    transform: scale(0.5);
+  }
+  .gauge-center {
+    content: "";
+    width: 60%;
+    height: 60%;
+    background: $almost-black;
+    border-radius: $gauge-radius;
+    position: absolute;
+    box-shadow: $box-shadow-lite;
+    right: 21%;
+    bottom: 0;
+    color: $white;
+    z-index: 10;
+  }
+  .gauge-center .label,
+  .gauge-center .number {
+    display: block;
+    width: 100%;
+    text-align: center;
+    border: 0 !important;
+  }
+  .gauge-center .label {
+    font-size: 0.85em;
+    opacity: 0.7;
+    margin: 1.1em 0 0.3em 0;
+  }
+  .gauge-center .number {
+    font-size: 1.1rem;
+  }
+  .needle {
+    width: 80px;
+    height: 7px;
+    background: $almost-black;
+    border-radius: 100% 5px 5px 100% !important;
+    position: absolute;
+    bottom: -2px;
+    left: 20px;
+    transform-origin: 100% 4px;
+    transform: rotate(0deg);
+    box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.38);
+  
+    z-index: 9;
+  }
+  
+  .gauge.caution .needle {
+    animation: caution 2s 1 both;
+    animation-delay: 1s;
+  }
+  
+  .gauge.good .needle {
+    animation: good 2s 1 both;
+    animation-delay: 1s;
+  }
+  
+  .gauge.danger .needle {
+    animation: danger 2s 1 both;
+    animation-delay: 1s;
+  }
+  
+  .slice-colors {
+    height: 100%;
+  }
+  
+  .slice-colors .st {
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border: 50px solid transparent;
+  }
+  .three .slice-colors .st.slice-item:nth-child(2) {
+    border-top: 50px #f1c40f solid;
+    border-right: 50px #f1c40f solid;
+    background-color: #1eaa59;
+  }
+  
+  .three .slice-colors .st.slice-item:nth-child(4) {
+    left: 50%;
+    border-bottom: 50px #e84c3d solid;
+    border-right: 50px #e84c3d solid;
+    background-color: #e67e22;
+  }
+  
+  .sensor-value-overlay {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    color: rgba(0,0,0, 0);
+    transition: 0.5s ease all;
+    transition-delay: 1s;
+    cursor: help;
+  }
+  
+  .sensor-value-overlay:hover {
+    color: rgba(0,0,0, .3);
+  }

@@ -1,0 +1,46 @@
+.item {
+    background: lighten($medblue, 45%);
+    border: 1px solid lighten($medblue, 35%);
+    box-shadow: $box-shadow-lite-down;
+    border-bottom: 5px solid $hellayellow;
+    border-radius: 15px 15px 0 0;
+    color: $darkblue;
+    margin-bottom: em(35px);
+    overflow: hidden;
+    padding: 1.5rem;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    min-width: 400px;
+  
+    &.caution {
+      background-color: $caution-transparent;
+      border-bottom-color: $caution;
+    }
+  
+    &.danger {
+      background-color: $danger-transparent;
+  
+      border-bottom-color: $danger;
+    }
+  
+    &.good {
+      background-color: $good-transparent;
+  
+      border-bottom-color: $good;
+    }
+  
+    .item-title {
+      color: darken($lightblue, 85%);
+      display: flex;
+      font-family: $heading-font-family;
+      font-size: em(24px);
+      justify-content: space-between;
+      flex-direction: column;
+      margin: 0 0 5px 0;    
+    }
+  
+    .item-image {
+      max-width: 100%;
+    }
+  }
